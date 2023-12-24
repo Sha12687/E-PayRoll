@@ -1,0 +1,47 @@
+﻿@model IEnumerable<EmployeePaymentSystem.Models.ScheduleModel>
+
+@{
+    ViewBag.Title = "ViewSchedule";
+}
+
+<div class="container mt-2 ms-2">
+    <h3> Selected Employee Schedule </h3>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Schedule Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Location</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @if (Model != null && Model.Any())
+    {
+        <tbody>
+            @foreach (var schedule in Model)
+            {
+                <tr>
+                    <td>@schedule.ScheduleDate</td>
+                    <td>@schedule.StartTime</td>
+                    <td>@schedule.EndTime</td>
+                    <td>@schedule.Location</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Admin", new { id = schedule.Id }, new { @class = "btn btn-primary btn-sm" })
+                        @Html.ActionLink("Delete", "Delete", "Admin", new { id = schedule.Id }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    }
+    else
+    {
+        <tr>
+            <td colspan="5">
+                <h4>Selected Employee has no schedule yet!!</h4>
+            </td>
+        </tr>
+    }
+</table>

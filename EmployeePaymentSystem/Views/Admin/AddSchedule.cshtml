@@ -1,0 +1,110 @@
+﻿@model EmployeePaymentSystem.Models.ScheduleModel
+
+@{
+    ViewBag.Title = "AddSchedule";
+}
+
+<h2>Add Schedule For  @Model.EmpName </h2>
+
+@using (Html.BeginForm("AddSchedule" ,"Admin" ,FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ScheduleDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ScheduleDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", @id = "ScheduleDate", @type = "text" } })
+            @Html.ValidationMessageFor(model => model.ScheduleDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.StartTime,"{0:HH/MM }", new { @class = "form-control clockpicker", @id = "StartTime", placeholder = "HH:MM" })
+            @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.EndTime, new { @class = "form-control clockpicker", @id = "EndTime", placeholder = "HH:MM" })
+            @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.EmployeeId)
+        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.css">
+
+    <script>
+        $(document).ready(function () {
+            $("#ScheduleDate").datepicker({
+                dateFormat: 'dd/mm/yy',
+                minDate: 0 // Restrict to current date and future dates
+            });
+
+            $('.clockpicker').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                autoclose: true,
+                twelvehour: true  // Set to true for 12-hour format, false for 24-hour format
+            });
+
+            $("form").submit(function (event) {
+                var selectedDate = $("#ScheduleDate").val();
+
+                if (!isFutureDate(selectedDate)) {
+                    event.preventDefault();
+                    $("#ScheduleDate").siblings(".text-danger").text("Cannot schedule for past dates.");
+                }
+
+                var startDate = new Date(selectedDate + ' ' + $("#StartTime").val());
+                var endDate = new Date(selectedDate + ' ' + $("#EndTime").val());
+
+                if (startDate >= endDate) {
+                    event.preventDefault();
+                    $("#EndTime").siblings(".text-danger").text("End time must be greater than start time.");
+                } else if (endDate - startDate < 30 * 60 * 1000) { // Minimum 30 minutes gap
+                    event.preventDefault();
+                    $("#EndTime").siblings(".text-danger").text("There must be a minimum 30-minute gap between start and end times.");
+                }
+            });
+
+            function isFutureDate(dateString) {
+                // Explicitly set the date format for parsing
+                var selectedDate = $.datepicker.parseDate('dd/mm/yy', dateString);
+                var currentDate = new Date();
+                return selectedDate >= currentDate;
+            }
+        });
+    </script>
+}
