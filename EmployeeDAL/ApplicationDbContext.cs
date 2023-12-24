@@ -18,6 +18,7 @@ namespace EmployeeDAL
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<Salary> Salaries { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         

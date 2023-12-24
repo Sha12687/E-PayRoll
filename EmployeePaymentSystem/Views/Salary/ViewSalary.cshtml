@@ -1,0 +1,40 @@
+﻿@model EmployeePaymentSystem.Models.SalaryModel
+
+@{
+    ViewBag.Title = "ViewSalary";
+}
+
+<div>
+    <h4>Salary</h4>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            Employee Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmpName)
+        </dd>
+        @if (Model.Amount != 0)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
+        }
+        else
+        {
+            <p>Employee doesn't have a salary.</p>
+        }
+    </dl>
+
+    @if (Model.Amount != 0)
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.SalaryId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.SalaryId })
+        </p>
+    }
+</div>

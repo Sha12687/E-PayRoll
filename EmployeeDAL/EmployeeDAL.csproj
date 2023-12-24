@@ -70,10 +70,15 @@
     <Compile Include="Migrations\202312240822099_attendance.designer.cs">
       <DependentUpon>202312240822099_attendance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312241126254_Salary.cs" />
+    <Compile Include="Migrations\202312241126254_Salary.designer.cs">
+      <DependentUpon>202312241126254_Salary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Salary.cs" />
     <Compile Include="Schedule.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312240822099_attendance.resx">
       <DependentUpon>202312240822099_attendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312241126254_Salary.resx">
+      <DependentUpon>202312241126254_Salary.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<EmployeePaymentSystem.Models.UserView>
+@{
+    ViewBag.Title = "ScheduleEmployee";
+}
+
+
+<div class="container">
+    <h2>List of Employees</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>@employee.FirstName</td>
+                    <td>
+                        @Html.ActionLink("View Salary", "ViewSalary", "Salary", new { employeeId = employee.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Add Salary", "Add", "Salary", new { employeeId = employee.Id }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

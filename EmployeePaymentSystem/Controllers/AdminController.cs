@@ -84,14 +84,14 @@ namespace EmployeePaymentSystem.Controllers
             var employeeSchedule = context.Schedules
            .Where(s => s.EmployeeId == employeeId)
            .ToList();
-            var convertToViewSchedule = employeeSchedule.Select(employee => new ScheduleModel
+            var convertToViewSchedule = employeeSchedule.Select(sche => new ScheduleModel
             {
-                Id = employee.Id,
-                ScheduleDate = employee.ScheduleDate.ToString("dd/MM/yyyy"), // Format the date as needed
-                StartTime = DateTime.Today.Add(employee.StartTime), // Combine with a default date
-                EndTime = DateTime.Today.Add(employee.EndTime), // Combine with a default date
-                Location = employee.Location,
-                EmployeeId = employee.EmployeeId,
+                Id = sche.Id,
+                ScheduleDate = sche.ScheduleDate.ToString("dd/MM/yyyy"), // Format the date as needed
+                StartTime = DateTime.Today.Add(sche.StartTime), // Combine with a default date
+                EndTime = DateTime.Today.Add(sche.EndTime), // Combine with a default date
+                Location = sche.Location,
+                EmployeeId = sche.EmployeeId,
                
             });
 
@@ -202,5 +202,7 @@ namespace EmployeePaymentSystem.Controllers
             return View(attendanceView.ToList());
         }
 
+
+     
     }
 }
