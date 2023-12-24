@@ -18,11 +18,9 @@
             {
                 <tr>
                     <td>@employee.FirstName</td>
-                   
-
                     <td>
-                        @Html.ActionLink("View Schedule", "ViewSchedule", "Admin", new { employeeId = employee.Id }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Add Schedule", "AddSchedule", "Admin", new { employeeId = employee.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("View Attendance", "ViewAttendance", "Admin", new { employeeId = employee.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Add Attendance", "AddAttendance", "Admin", new { employeeId = employee.Id }, new { @class = "btn btn-primary" })
                     </td>
                 </tr>
             }

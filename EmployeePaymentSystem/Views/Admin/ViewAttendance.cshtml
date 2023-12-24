@@ -1,0 +1,53 @@
+﻿@model IEnumerable<EmployeePaymentSystem.Models.AttendanceModel2>
+@{
+    ViewBag.Title = "ViewAttendance";
+}
+
+<div class="container m-2">
+    <h2>Employee Attendance</h2>
+</div>
+<table id="attendanceTable" class="table">
+    <thead>
+        <tr>
+            <th>Year</th>
+            <th>Month</th>
+            <th>Date</th>
+            <th>IsPresent</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Year</td>
+                <td>@item.Month</td>
+                <td>@item.Date</td>
+                <td>
+                    @{
+                        string presentText = item.IsPresent ? "Present" : "Absent";
+                        string textColor = item.IsPresent ? "green" : "red";
+                    }
+                    <span style="color: @textColor;">@presentText</span>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#attendanceTable').DataTable();
+           
+        });
+    </script>
+}

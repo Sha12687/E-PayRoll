@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Attendance.cs" />
     <Compile Include="Migrations\202312231154487_again new approch.cs" />
     <Compile Include="Migrations\202312231154487_again new approch.designer.cs">
       <DependentUpon>202312231154487_again new approch.cs</DependentUpon>
@@ -64,6 +65,10 @@
     <Compile Include="Migrations\202312231948031_schedule.cs" />
     <Compile Include="Migrations\202312231948031_schedule.designer.cs">
       <DependentUpon>202312231948031_schedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312240822099_attendance.cs" />
+    <Compile Include="Migrations\202312240822099_attendance.designer.cs">
+      <DependentUpon>202312240822099_attendance.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Role.cs" />
@@ -84,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312231948031_schedule.resx">
       <DependentUpon>202312231948031_schedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312240822099_attendance.resx">
+      <DependentUpon>202312240822099_attendance.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

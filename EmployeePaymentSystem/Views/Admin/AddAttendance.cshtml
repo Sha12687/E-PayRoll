@@ -1,0 +1,65 @@
+﻿@model EmployeePaymentSystem.Models.AttendanceModel
+
+@{
+    ViewBag.Title = "AddAttendance";
+}
+
+
+
+<h2>@Model.EmpName - Attendance </h2>
+
+@using (Html.BeginForm("AddAttendance","Admin",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Attendance</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group col-6">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <!-- Use jQuery UI datepicker for the date input -->
+                @Html.EditorFor(model => model.Date, "{ 0:dd / MM / yyyy}", new { htmlAttributes = new { @class = "form-control", @id = "attendanceDate" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-6">
+            @Html.HiddenFor(model => model.EmployeeId)
+            @Html.LabelFor(model => model.IsPresent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <!-- Use a dropdown for present/absent selection -->
+                    @Html.DropDownListFor(model => model.IsPresent, new SelectList(new[]
+  {
+                            new SelectListItem { Text = "Present", Value = "true" },
+                            new SelectListItem { Text = "Absent", Value = "false" },
+                        }, "Value", "Text"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IsPresent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group ml-lg-2">
+            <div class="col-md-offset-2 ms-2 col-md-10">
+                <button type="submit" value="Add" class="btn btn-dark">Add</button>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script>
+            $(document).ready(function () {
+                $("#attendanceDate").datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    minDate: 0 // Restrict to current date and future dates
+                });
+            });
+        </script>
+    }
+}
